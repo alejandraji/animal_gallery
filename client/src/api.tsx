@@ -2,7 +2,7 @@ import Animal from "./Animal";
 //GET
 //DELETE
 // MAYBE PUT
-export const postAnimal = async (animal: Animal) =>{
+export const postAnimal = async (animal: Animal) : Promise<Animal> =>{
   const response = await fetch('/animals', {
     method: 'POST',
     body: JSON.stringify(animal),
@@ -16,6 +16,12 @@ export const postAnimal = async (animal: Animal) =>{
   } else {
     throw new Error(data.message);
   }
+}
+
+export const getAnimals = async () : Promise<Animal[]> => {
+  const response = await fetch('/animals');
+  const data = await response.json();
+  return (data as any).animals
 }
 
    

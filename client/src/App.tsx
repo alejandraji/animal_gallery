@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import './App.scss';
 import AddAnimal from './AddAnimal';
-import { postAnimal } from './api'
+import { postAnimal, getAnimals } from './api'
 import Animal from './Animal';
 
 const  App = () => {
@@ -10,20 +10,10 @@ const  App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successfullyAdded,  setSuccessfullyAdded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null)
-console.log(currentAnimal);
-  useEffect(() => {
-    /** Fetch animals to show on the page */
-    async function fetchAnimals() {
-      try {
-        let data = await fetch('/animals'); 
-        data = await data.json();
-        setAnimals((data as any).animals);
-      } catch (e) {
 
-      }
-    }
-    
-    fetchAnimals();
+  useEffect(() => {
+    getAnimals()
+      .then(animals => setAnimals(animals))
   }, []);
 
   /** Open the add animal modal */
