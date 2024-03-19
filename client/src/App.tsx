@@ -1,11 +1,8 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import './App.scss';
 import AddAnimal from './AddAnimal';
-
-interface Animal {
-  name: string,
-  description: string
-}
+import { postAnimal } from './api'
+import Animal from './Animal';
 
 const  App = () => {
   const [currentAnimal, setCurrentAnimal] = useState<Animal>({name:'', description:''})
@@ -41,24 +38,16 @@ console.log(currentAnimal);
 
   const addAnimal = async (event: FormEvent) => {
     event.preventDefault();
-
-    /** Call API to create new animal */
-    const response = await fetch('/animals', {
-      method: 'POST',
-      body: JSON.stringify(currentAnimal),
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    });
-    if (response.ok){
+    try {
+      await postAnimal(currentAnimal);
       setSuccessfullyAdded(true);
       setIsModalOpen(false);
       setAnimals([...animals, currentAnimal])
       setCurrentAnimal({name:'', description:''})
-    } else {
-      const data = await response.json()
-      setErrorMessage(data.message)
+    } catch (e: any) {
+      setErrorMessage(e.message)
     }
+  
   }
 
   return (
@@ -69,6 +58,7 @@ console.log(currentAnimal);
         <section>
           <button onClick={openModal} className="primary-btn">Add animal</button>
           {animals.length > 0 ?
+          //TODO own component AnimalCard
             <ul className="animal-list">
               {animals.map((animal: Animal, idx) => { 
                 return (
