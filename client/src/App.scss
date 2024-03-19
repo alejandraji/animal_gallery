@@ -1,0 +1,49 @@
+body {
+  padding: 16px;
+  color: #333;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.animal-list {
+  list-style-type: none;
+}
+
+.animal-tile {
+  border: 1px solid #333;
+  padding: 16px;
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin-right: 32px;
+  margin-bottom: 32px;
+}
+
+.animal-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.primary-btn {
+  color: #e8e8e8;
+  background-color: #666;
+  border: none;
+  padding: 8px 16px;
+  margin: 8px 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
