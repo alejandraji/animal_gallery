@@ -2,17 +2,18 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import './App.scss';
 import AddAnimal from './AddAnimal';
 
-interface Animals {
+interface Animal {
   name: string,
   description: string
 }
 
 const  App = () => {
-  const [animals, setAnimals] = useState([]);
+  const [currentAnimal, setCurrentAnimal] = useState<Animal>({name:'', description:''})
+  const [animals, setAnimals] = useState<Animal[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successfullyAdded,  setSuccessfullyAdded] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null)
-
+console.log(currentAnimal);
   useEffect(() => {
     /** Fetch animals to show on the page */
     async function fetchAnimals() {
@@ -41,17 +42,10 @@ const  App = () => {
   const addAnimal = async (event: FormEvent) => {
     event.preventDefault();
 
-    /** Find form inputs and grab their values */
-    const formEls: { [key: string]: string } = {};
-    const inputs = (event.target as HTMLElement).querySelectorAll('input');
-    inputs.forEach((input: { name: string, value: string }) => {
-      formEls[input.name] = input.value;
-    });
-
     /** Call API to create new animal */
     const response = await fetch('/animals', {
       method: 'POST',
-      body: JSON.stringify(formEls),
+      body: JSON.stringify(currentAnimal),
       headers: {
         'Content-Type': 'application/json',
       }
@@ -59,6 +53,8 @@ const  App = () => {
     if (response.ok){
       setSuccessfullyAdded(true);
       setIsModalOpen(false);
+      setAnimals([...animals, currentAnimal])
+      setCurrentAnimal({name:'', description:''})
     } else {
       const data = await response.json()
       setErrorMessage(data.message)
@@ -74,7 +70,7 @@ const  App = () => {
           <button onClick={openModal} className="primary-btn">Add animal</button>
           {animals.length > 0 ?
             <ul className="animal-list">
-              {animals.map((animal: Animals, idx) => { 
+              {animals.map((animal: Animal, idx) => { 
                 return (
                   <li className="animal-tile" key={idx}>
                     <h2 className="animal-title">{animal.name}</h2>
@@ -86,7 +82,13 @@ const  App = () => {
           :
             <p>No animals. Try adding one.</p>
           }
-          <AddAnimal isOpen={isModalOpen} addAnimal={addAnimal} closeModal={closeModal} />
+          <AddAnimal
+            currentAnimal={currentAnimal}
+            setCurrentAnimal={setCurrentAnimal}
+            isOpen={isModalOpen} 
+            addAnimal={addAnimal} 
+            closeModal={closeModal}
+          />
         </section>
     </main>
   );
