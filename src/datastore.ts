@@ -23,44 +23,44 @@ class Datastore {
       fs.writeFileSync(this.filename, '[]');
     }
   }
-  validateAttributes(attributes){
-    if (!attributes.name){
+  validateAnimal(animal){
+    if (!animal.name){
       return "Missing name"
     }
-    if (!attributes.description){
+    if (!animal.description){
       return "Missing description"
     }
-    if (attributes.name.length === 0){
+    if (animal.name.length === 0){
       return "Empty name"
     }
-    if (attributes.description.length === 0){
+    if (animal.description.length === 0){
       return "Empty description"
     }
     return null;
   }
   /** Add an animal to the datastore file */
-  async createNewAnimal(attributes) {
-    const errorMessage = this.validateAttributes(attributes);
+  async createNewAnimal(animal) {
+    const errorMessage = this.validateAnimal(animal);
     if (errorMessage) {
       throw new Error(errorMessage)
     }
     // Read filecontents of the datastore
-    const jsonRecords = await
+    const animalsJson = await
       fs.promises.readFile(this.filename,{
       encoding : 'utf8'
     });
     // Parsing JSON records in JavaScript
     // object type records
-    const objRecord = JSON.parse(jsonRecords);
+    const animals = JSON.parse(animalsJson);
     // Adding new record
-    objRecord.push(attributes);
+    animals.push(animal);
     // Writing all records back to the file
     await fs.promises.writeFile(
       this.filename,
-      JSON.stringify(objRecord, null, 2)  
+      JSON.stringify(animals, null, 2)  
     );
  
-    return attributes;
+    return animal;
   }
 
   /** Fetches aninamls from datastore file */
