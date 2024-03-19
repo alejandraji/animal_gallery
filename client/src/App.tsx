@@ -3,9 +3,12 @@ import './App.scss';
 import AddAnimal from './AddAnimal';
 import { postAnimal, getAnimals } from './api'
 import Animal from './Animal';
+import AnimalCard from './AnimalCard';
+
+const emptyAnimal = {id:0, name:'', description:''}
 
 const  App = () => {
-  const [currentAnimal, setCurrentAnimal] = useState<Animal>({name:'', description:''})
+  const [currentAnimal, setCurrentAnimal] = useState<Animal>(emptyAnimal)
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successfullyAdded,  setSuccessfullyAdded] = useState(false);
@@ -33,11 +36,27 @@ const  App = () => {
       setSuccessfullyAdded(true);
       setIsModalOpen(false);
       setAnimals([...animals, currentAnimal])
-      setCurrentAnimal({name:'', description:''})
+      setCurrentAnimal(emptyAnimal)
     } catch (e: any) {
       setErrorMessage(e.message)
     }
   
+  }
+
+  const renderAnimalCard = () => {
+   return (
+    <>
+      {animals.length > 0 ?
+      <AnimalCard
+        name=''
+        description=''
+        animals={animals}
+      />
+      :
+      <p>No animals. Try adding one.</p>
+      }
+    </>
+   )
   }
 
   return (
@@ -47,21 +66,7 @@ const  App = () => {
         {errorMessage && <p className="error">{errorMessage}</p>}
         <section>
           <button onClick={openModal} className="primary-btn">Add animal</button>
-          {animals.length > 0 ?
-          //TODO own component AnimalCard
-            <ul className="animal-list">
-              {animals.map((animal: Animal, idx) => { 
-                return (
-                  <li className="animal-tile" key={idx}>
-                    <h2 className="animal-title">{animal.name}</h2>
-                    <p>{animal.description}</p>
-                  </li>
-                )
-              })}
-            </ul>
-          :
-            <p>No animals. Try adding one.</p>
-          }
+          {renderAnimalCard()}
           <AddAnimal
             currentAnimal={currentAnimal}
             setCurrentAnimal={setCurrentAnimal}
