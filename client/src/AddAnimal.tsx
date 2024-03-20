@@ -1,8 +1,6 @@
 import React, { FormEventHandler, MouseEventHandler } from 'react';
 import Modal from 'react-modal';
-
 import './AddAnimal.scss';
-import { FunctionOrConstructorTypeNode } from 'typescript';
 
 const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAnimal }: { isOpen: boolean, closeModal: MouseEventHandler, addAnimal: FormEventHandler, currentAnimal: any, setCurrentAnimal: any }) => {
   const customStyles = {
@@ -30,7 +28,7 @@ const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAni
       style={customStyles}
     >
       <h2>Add animal</h2>
-      <form onSubmit={addAnimal} method="post">
+      <form className="form-container" onSubmit={addAnimal} method="post">
         <div className="add-animal-form-input">
           <label htmlFor="name">Name:</label>
           <input type="text" name="name" id="name" onChange={event => onChange(event,"name")} value={currentAnimal.name} placeholder="ex: Zebra" />
@@ -39,9 +37,9 @@ const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAni
           <label htmlFor="description">Description:</label>
           <input type="text" name="description" id="description" onChange={event => onChange(event,"description")} value={currentAnimal.description} placeholder="ex: Animal with stripes" />
         </div>
-        <div>
-          <button type="submit" className="primary-btn">Add</button>
-          <button type="button" onClick={closeModal} className="add-animal-cancel">Cancel</button>
+        <div className="form-btns">
+          <button type="submit" className="add-btn">Add</button>
+          <button type="button" onClick={closeModal} className="cancel-btn">Cancel</button>
         </div>
       </form>
     </Modal>

@@ -47,10 +47,11 @@ const  App = () => {
    return (
     <>
       {animals.length > 0 ?
-      <AnimalCard
-        name=''
-        description=''
-        animals={animals}
+      <AnimalCard 
+        animals={animals} 
+        name={''} 
+        description={''} 
+        id={0} 
       />
       :
       <p>No animals. Try adding one.</p>
@@ -61,20 +62,22 @@ const  App = () => {
 
   return (
     <main className="App">
-      <h1 className="title">Animals</h1>
-        {successfullyAdded && <p className="success">Item successfully added.</p>}
-        {errorMessage && <p className="error">{errorMessage}</p>}
-        <section>
-          <button onClick={openModal} className="primary-btn">Add animal</button>
-          {renderAnimalCard()}
-          <AddAnimal
-            currentAnimal={currentAnimal}
-            setCurrentAnimal={setCurrentAnimal}
-            isOpen={isModalOpen} 
-            addAnimal={addAnimal} 
-            closeModal={closeModal}
-          />
-        </section>
+      <h1 className="title">Animal Gallery</h1>
+      <section>
+        <div className="messages-btn">
+          {successfullyAdded && <p className="success">Item successfully added.</p>}
+          {errorMessage && <p className="error">{errorMessage}</p>}
+          <button onClick={openModal} className="create-btn">Add animal</button>
+        </div>
+        {renderAnimalCard()}
+        <AddAnimal
+          currentAnimal={currentAnimal}
+          setCurrentAnimal={setCurrentAnimal}
+          isOpen={isModalOpen} 
+          addAnimal={addAnimal} 
+          closeModal={closeModal}
+        />
+      </section>
     </main>
   );
 };

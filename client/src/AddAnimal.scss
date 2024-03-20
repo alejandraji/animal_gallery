@@ -1,11 +1,40 @@
-.add-animal-cancel {
-    background-color: white;
-    color: #333;
-    border: 1px solid #333;
-    padding: 7px 16px;
-    margin-left: 16px;
+.cancel-btn {
+  background-color: #C41E3A;
+  color: white;
+  border: 1px solid white;
+  padding: 7px 16px;
+  margin-left: 16px;
+
+  &:hover {
+    cursor: pointer;;
+  }
 }
 
 .add-animal-form-input {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.add-btn {
+  background-color: #229954;
+  color: white;
+  border: 1px solid white;
+  padding: 7px 16px;
+  margin-left: 16px;
+
+  &:hover {
+    cursor: pointer;;
+  }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-btns {
+  margin-top: 30px;
+}
+
+label {
+  margin-right: 5px;
 }
