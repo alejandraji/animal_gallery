@@ -1,0 +1,45 @@
+.animal-list-container {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.animal-tile {
+  border: 1px solid #333;
+  padding: 16px;
+  width: 200px;
+  height: 200px;
+  margin-right: 32px;
+  margin-bottom: 32px;
+}
+
+.animal-title {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.secondary-btn {
+  color: black;
+  border: none;
+  padding: 6px 11px;
+  float: right;
+  border-radius: 20px;
+  font-size: 14px;
+  
+  &:hover {
+    background-color: #C41E3A;
+    color: white; 
+    cursor: pointer;
+  }
+}
+.edit-btn {
+  margin-top: 100px;
+}
+
+p {
+  overflow-wrap: break-word;
+}

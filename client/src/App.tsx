@@ -3,7 +3,7 @@ import './App.scss';
 import AddAnimal from './AddAnimal';
 import { postAnimal, getAnimals } from './api'
 import Animal from './Animal';
-import AnimalCard from './AnimalCard';
+import AnimalCards from './AnimalCards';
 
 const emptyAnimal = {id:0, name:'', description:''}
 
@@ -47,11 +47,9 @@ const  App = () => {
    return (
     <>
       {animals.length > 0 ?
-      <AnimalCard 
+      <AnimalCards 
         animals={animals} 
-        name={''} 
-        description={''} 
-        id={0} 
+        setAnimals={setAnimals}
       />
       :
       <p>No animals. Try adding one.</p>
