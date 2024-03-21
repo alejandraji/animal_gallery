@@ -31,11 +31,27 @@ const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAni
       <form className="form-container" onSubmit={addAnimal} method="post">
         <div className="add-animal-form-input">
           <label htmlFor="name">Name:</label>
-          <input type="text" name="name" id="name" onChange={event => onChange(event,"name")} value={currentAnimal.name} placeholder="ex: Zebra" />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onChange={event => onChange(event,"name")}
+            value={currentAnimal.name}
+            required
+            placeholder="ex: Zebra"
+          />
         </div>
         <div className="add-animal-form-row">
           <label htmlFor="description">Description:</label>
-          <input type="text" name="description" id="description" onChange={event => onChange(event,"description")} value={currentAnimal.description} placeholder="ex: Animal with stripes" />
+          <input
+            type="text"
+            name="description"
+            id="description"
+            onChange={event => onChange(event,"description")}
+            required
+            value={currentAnimal.description}
+            placeholder="ex: Animal with stripes"
+          />
         </div>
         <div className="form-btns">
           <button type="submit" className="add-btn">Add</button>
