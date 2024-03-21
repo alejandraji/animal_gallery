@@ -58,11 +58,11 @@ class Datastore {
       ...animal,
       id: maxId + 1
     }
-    animals.push(newAnimal);
+
     // Writing all records back to the file
     await fs.promises.writeFile(
       this.filename,
-      JSON.stringify(animals, null, 2)
+      JSON.stringify([...animals, newAnimal], null, 2)
     );
 
     return newAnimal;
@@ -89,14 +89,12 @@ class Datastore {
     // object type records
     const animals = JSON.parse(animalsJson);
 
-    if (!animals.some(animal => animal.id === id) === false){
-      throw new Error("can't delete nonexistment id")
-    }
-    const animalsWithoutDeleteTarget = animals.filter(animal => animal.id != id);
+    // TODO - maybe add validation that ID already exists?
+
     // Writing all records back to the file
     await fs.promises.writeFile(
       this.filename,
-      JSON.stringify(animalsWithoutDeleteTarget, null, 2)
+      JSON.stringify(animals.filter(animal => animal.id != id), null, 2)
     );
 
     return null;

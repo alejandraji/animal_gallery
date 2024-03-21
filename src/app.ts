@@ -23,7 +23,7 @@ app.post('/animals', async (req, res) => {
     res.send({animal: createdAnimal});
   } catch (e) {
     console.error(e);
-    res.status(400).send({ message: e.message })
+    res.status(400).send({ message: e.message })  // TODO - more appropriate status depending on what's wrong
   }
 });
 
@@ -33,7 +33,7 @@ app.delete('/animals/:id', async (req, res) => {
     res.sendStatus(200);
   } catch (e) {
     console.error(e);
-    res.status(400).send({ message: e.message })
+    res.status(400).send({ message: e.message }) // TODO - more appropriate status depending on what's wrong
   }
 });
 
