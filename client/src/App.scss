@@ -44,3 +44,12 @@ body {
     background-color: #0000FF;
   }
 }
+
+.animal-list-container {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}

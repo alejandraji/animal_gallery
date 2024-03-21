@@ -29,13 +29,14 @@
   float: right;
   border-radius: 20px;
   font-size: 14px;
-  
+
   &:hover {
     background-color: #C41E3A;
-    color: white; 
+    color: white;
     cursor: pointer;
   }
 }
+
 .edit-btn {
   margin-top: 100px;
 }

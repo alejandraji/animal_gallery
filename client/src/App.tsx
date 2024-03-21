@@ -3,7 +3,7 @@ import './App.scss';
 import AddAnimal from './AddAnimal';
 import { postAnimal, getAnimals } from './api'
 import Animal from './Animal';
-import AnimalCards from './AnimalCards';
+import AnimalCard from './AnimalCard';
 
 const emptyAnimal = {id:0, name:'', description:''}
 
@@ -40,17 +40,25 @@ const  App = () => {
     } catch (e: any) {
       setErrorMessage(e.message)
     }
-  
   }
 
-  const renderAnimalCard = () => {
+  const removeAnimal = (animal: Animal) => {
+    setAnimals(animals.filter(({id}) => id !== animal.id));
+  }
+
+  const renderAnimalCards = () => {
    return (
     <>
       {animals.length > 0 ?
-      <AnimalCards 
-        animals={animals} 
-        setAnimals={setAnimals}
-      />
+        (<ul className="animal-list-container">
+          {animals.map(animal =>
+            <AnimalCard
+              key={animal.id}
+              animal={animal}
+              removeAnimal={removeAnimal}
+            />
+          )}
+        </ul>)
       :
       <p>No animals. Try adding one.</p>
       }
@@ -67,12 +75,12 @@ const  App = () => {
           {errorMessage && <p className="error">{errorMessage}</p>}
           <button onClick={openModal} className="create-btn">Add animal</button>
         </div>
-        {renderAnimalCard()}
+        {renderAnimalCards()}
         <AddAnimal
           currentAnimal={currentAnimal}
           setCurrentAnimal={setCurrentAnimal}
-          isOpen={isModalOpen} 
-          addAnimal={addAnimal} 
+          isOpen={isModalOpen}
+          addAnimal={addAnimal}
           closeModal={closeModal}
         />
       </section>
