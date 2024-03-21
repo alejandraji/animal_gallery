@@ -1,5 +1,5 @@
 export default interface Animal {
-  id: number,
+  id?: number,
   name: string,
   description: string
 }

@@ -1,18 +1,30 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import './App.scss';
 import AddAnimal from './AddAnimal';
-import { postAnimal, getAnimals } from './api'
+import { postAnimal, getAnimals, putAnimal } from './api'
 import Animal from './Animal';
 import AnimalCard from './AnimalCard';
 
-const emptyAnimal = {id:0, name:'', description:''}
+const emptyAnimal = {name:'', description:''}
 
 const  App = () => {
   const [currentAnimal, setCurrentAnimal] = useState<Animal>(emptyAnimal)
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [successfullyAdded,  setSuccessfullyAdded] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage,  setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
+  const removeAnimal = (animal: Animal) => {
+    setAnimals(animals.filter(({id}) => id !== animal.id));
+  }
+
+  const addAnimal = (animal: Animal) => {
+    setAnimals([...animals, animal]);
+  }
+
+  const replaceAnimal = (animal: Animal) => {
+    setAnimals(animals.map(a => a.id === animal.id ? animal : a));
+  }
 
   useEffect(() => {
     getAnimals()
@@ -29,22 +41,26 @@ const  App = () => {
     setIsModalOpen(false);
   }
 
-  const addAnimal = async (event: FormEvent) => {
+  const saveAnimal = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      await postAnimal(currentAnimal);
-      setSuccessfullyAdded(true);
+      if (currentAnimal.id === undefined) {
+        await postAnimal(currentAnimal);
+        setSuccessMessage("Item successfully added.");
+        addAnimal(currentAnimal);
+      } else {
+        await putAnimal(currentAnimal);
+        setSuccessMessage("Item successfully updated.");
+        replaceAnimal(currentAnimal)
+      }
+
       setIsModalOpen(false);
-      setAnimals([...animals, currentAnimal])
       setCurrentAnimal(emptyAnimal)
     } catch (e: any) {
       setErrorMessage(e.message)
     }
   }
 
-  const removeAnimal = (animal: Animal) => {
-    setAnimals(animals.filter(({id}) => id !== animal.id));
-  }
 
   const renderAnimalCards = () => {
    return (
@@ -56,6 +72,8 @@ const  App = () => {
               key={animal.id}
               animal={animal}
               removeAnimal={removeAnimal}
+              setIsModalOpen={setIsModalOpen}
+              setCurrentAnimal={setCurrentAnimal}
             />
           )}
         </ul>)
@@ -71,7 +89,7 @@ const  App = () => {
       <h1 className="title">Animal Gallery</h1>
       <section>
         <div className="messages-btn">
-          {successfullyAdded && <p className="success">Item successfully added.</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
           {errorMessage && <p className="error">{errorMessage}</p>}
           <button onClick={openModal} className="create-btn">Add animal</button>
         </div>
@@ -80,7 +98,7 @@ const  App = () => {
           currentAnimal={currentAnimal}
           setCurrentAnimal={setCurrentAnimal}
           isOpen={isModalOpen}
-          addAnimal={addAnimal}
+          saveAnimal={saveAnimal}
           closeModal={closeModal}
         />
       </section>

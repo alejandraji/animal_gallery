@@ -2,7 +2,7 @@ import React, { FormEventHandler, MouseEventHandler } from 'react';
 import Modal from 'react-modal';
 import './AddAnimal.scss';
 
-const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAnimal }: { isOpen: boolean, closeModal: MouseEventHandler, addAnimal: FormEventHandler, currentAnimal: any, setCurrentAnimal: any }) => {
+const AddAnimal = ({ isOpen, closeModal, saveAnimal, currentAnimal, setCurrentAnimal }: { isOpen: boolean, closeModal: MouseEventHandler, saveAnimal: FormEventHandler, currentAnimal: any, setCurrentAnimal: any }) => {
   const customStyles = {
     content: {
       top: '50%',
@@ -28,7 +28,7 @@ const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAni
       style={customStyles}
     >
       <h2>Add animal</h2>
-      <form className="form-container" onSubmit={addAnimal} method="post">
+      <form className="form-container" onSubmit={saveAnimal} method="post">
         <div className="add-animal-form-input">
           <label htmlFor="name">Name:</label>
           <input
@@ -54,7 +54,7 @@ const AddAnimal = ({ isOpen, closeModal, addAnimal, currentAnimal, setCurrentAni
           />
         </div>
         <div className="form-btns">
-          <button type="submit" className="add-btn">Add</button>
+          <button type="submit" className="add-btn">Save</button>
           <button type="button" onClick={closeModal} className="cancel-btn">Cancel</button>
         </div>
       </form>

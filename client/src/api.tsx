@@ -34,6 +34,23 @@ export const deleteAnimalById =  async (id: number) : Promise<void> => {
   }
 }
 
+export const putAnimal =  async (animal: Animal) : Promise<Animal> => {
+  console.log(animal);
+  const response = await fetch(`/animals/${animal.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(animal),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  });
+  if (response.ok) {
+    return animal;
+  } else {
+    const e = await response.json();
+    throw new Error(e.message);
+  }
+}
+
 
 
 // export const postAnimalById =  async (id: number) : Promise<void> => {

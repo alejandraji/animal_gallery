@@ -100,6 +100,37 @@ class Datastore {
     return null;
   }
 
+  /** Update an animal to the datastore file */
+  async updateAnimal(animal) {
+    const errorMessage = this.validateAnimal(animal);
+    if (errorMessage) {
+      throw new Error(errorMessage)
+    }
+    // Read filecontents of the datastore
+    const animalsJson = await
+      fs.promises.readFile(this.filename,{
+      encoding : 'utf8'
+    });
+    // Parsing JSON records in JavaScript
+    // object type records
+    const existingAnimals = JSON.parse(animalsJson);
+
+    if (!existingAnimals.map(({id}) => id).includes(animal.id)) {
+      throw new Error("Can't update non-existent animal")
+    }
+
+    const updatedAnimals = existingAnimals.map(existingAnimal => {
+      return existingAnimal.id == animal.id ? animal : existingAnimal
+    });
+
+    // Writing all records back to the file
+    await fs.promises.writeFile(
+      this.filename,
+      JSON.stringify(updatedAnimals, null, 2)
+    );
+
+    return animal;
+  }
 }
 
 // The datastore that is serving as a local DB

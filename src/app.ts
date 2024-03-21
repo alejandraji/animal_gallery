@@ -17,9 +17,8 @@ app.get('/animals', async (req, res) => {
 
 /** Endpoint to add a new animal to the datastore */
 app.post('/animals', async (req, res) => {
-  const receivedData = req.body;
   try {
-    const createdAnimal = await datastore.createNewAnimal(receivedData);
+    const createdAnimal = await datastore.createNewAnimal(req.body);
     res.send({animal: createdAnimal});
   } catch (e) {
     console.error(e);
@@ -37,7 +36,16 @@ app.delete('/animals/:id', async (req, res) => {
   }
 });
 
-// app.put('/animals/:id')
+app.put('/animals/:id', async (req, res) => {
+  try {
+    console.log(req.body)
+    await datastore.updateAnimal(req.body);
+    res.sendStatus(200);
+  } catch (e) {
+    console.error(e);
+    res.status(400).send({ message: e.message }) // TODO - more appropriate status depending on what's wrong
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
