@@ -36,12 +36,6 @@ export const deleteAnimalById =  async (id: number) : Promise<void> => {
 
 
 
-
-
-
-
-
-
 // export const postAnimalById =  async (id: number) : Promise<void> => {
 //   const response = await fetch(`/animals/${id}`, {
 //     method: 'PUT',
@@ -52,4 +46,3 @@ export const deleteAnimalById =  async (id: number) : Promise<void> => {
 //   }
 // }
 
-   
