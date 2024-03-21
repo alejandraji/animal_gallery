@@ -1,8 +1,8 @@
 import React, { FormEventHandler, MouseEventHandler } from 'react';
 import Modal from 'react-modal';
-import './AddAnimal.scss';
+import './AnimalFormModal.scss';
 
-const AddAnimal = ({ isOpen, closeModal, saveAnimal, currentAnimal, setCurrentAnimal }: { isOpen: boolean, closeModal: MouseEventHandler, saveAnimal: FormEventHandler, currentAnimal: any, setCurrentAnimal: any }) => {
+const AnimalFormModal = ({ isOpen, closeModal, saveAnimal, currentAnimal, setCurrentAnimal }: { isOpen: boolean, closeModal: MouseEventHandler, saveAnimal: FormEventHandler, currentAnimal: any, setCurrentAnimal: any }) => {
   const customStyles = {
     content: {
       top: '50%',
@@ -62,4 +62,4 @@ const AddAnimal = ({ isOpen, closeModal, saveAnimal, currentAnimal, setCurrentAn
   )
 }
 
-export default AddAnimal;
+export default AnimalFormModal;

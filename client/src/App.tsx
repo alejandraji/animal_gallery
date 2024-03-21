@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import './App.scss';
-import AddAnimal from './AddAnimal';
+import AnimalFormModal from './AnimalFormModal';
 import { postAnimal, getAnimals, putAnimal } from './api'
 import Animal from './Animal';
 import AnimalCard from './AnimalCard';
@@ -94,7 +94,7 @@ const  App = () => {
           <button onClick={openModal} className="create-btn">Add animal</button>
         </div>
         {renderAnimalCards()}
-        <AddAnimal
+        <AnimalFormModal
           currentAnimal={currentAnimal}
           setCurrentAnimal={setCurrentAnimal}
           isOpen={isModalOpen}
