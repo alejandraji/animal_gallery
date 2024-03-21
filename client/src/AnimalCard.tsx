@@ -3,23 +3,23 @@ import Animal from './Animal';
 import './AnimalCard.scss';
 import { deleteAnimalById } from './api';
 
-const AnimalCard = ({ animal, removeAnimal, setCurrentAnimal, setIsModalOpen } : { animal: Animal, removeAnimal: (animal: Animal) => void , setCurrentAnimal: Dispatch<SetStateAction<Animal>>, setIsModalOpen: Dispatch<SetStateAction<boolean>>}) => {
+const AnimalCard = ({ animal, removeAnimal, setCurrentAnimal, setIsModalOpen, setSuccessMessage, setErrorMessage } : { animal: Animal, removeAnimal: (animal: Animal) => void , setCurrentAnimal: Dispatch<SetStateAction<Animal>>, setIsModalOpen: Dispatch<SetStateAction<boolean>>, setSuccessMessage: any, setErrorMessage: any}) => {
   const deleteHandler = async () =>{
     try {
       if (animal.id !== undefined) {
         const response = await deleteAnimalById(animal.id);
         removeAnimal(animal);
-        console.log('Animal deleted successfully');
+        setErrorMessage('Animal deleted successfully');
       }
     } catch (error) {
-      console.error('Error on deleting animal', error);
+      setErrorMessage('Error on deleting animal');
     }
   }
 
   const editHandler = (event: MouseEvent) => {
     event.preventDefault();
-    setIsModalOpen(true);
     setCurrentAnimal(animal);
+    setIsModalOpen(true);
   }
 
   return <li className="animal-tile" key={animal.id}>

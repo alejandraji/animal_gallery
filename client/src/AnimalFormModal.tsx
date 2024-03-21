@@ -1,9 +1,10 @@
-import React, { FormEvent, FormEventHandler, MouseEventHandler } from 'react';
+import React, { FormEvent, ChangeEvent } from 'react';
 import Modal from 'react-modal';
 import { postAnimal, putAnimal } from './api';
 import './AnimalFormModal.scss';
 
 const AnimalFormModal = ({ isOpen, currentAnimal, setCurrentAnimal, setIsModalOpen, setSuccessMessage, setErrorMessage, addAnimal, replaceAnimal }: { isOpen: boolean, currentAnimal: any, setCurrentAnimal: any, setIsModalOpen: any, setSuccessMessage: any, setErrorMessage: any, addAnimal: any, replaceAnimal: any }) => {
+  const isNewAnimal = currentAnimal.id === undefined;
   const customStyles = {
     content: {
       top: '50%',
@@ -15,24 +16,23 @@ const AnimalFormModal = ({ isOpen, currentAnimal, setCurrentAnimal, setIsModalOp
     },
   };
 
-  const onChange = (e: { target: { value: any; }; }, name: any) =>{
+  const onChange = (e: ChangeEvent<HTMLInputElement>, name: string) =>{
     setCurrentAnimal({
       ...currentAnimal,
       [name]: e.target.value
     })
   }
 
-
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      if (currentAnimal.id === undefined) {
+      if (isNewAnimal) {
         await postAnimal(currentAnimal);
-        setSuccessMessage("Item successfully added.");
+        setSuccessMessage("Animal successfully added!");
         addAnimal(currentAnimal);
       } else {
         await putAnimal(currentAnimal);
-        setSuccessMessage("Item successfully updated.");
+        setSuccessMessage("Animal successfully updated!");
         replaceAnimal(currentAnimal)
       }
       setTimeout(() => setSuccessMessage(null), 3000);
@@ -44,13 +44,18 @@ const AnimalFormModal = ({ isOpen, currentAnimal, setCurrentAnimal, setIsModalOp
     }
   }
 
+  const onCancel = () => {
+    setIsModalOpen(false);
+    setCurrentAnimal({name:'', description:''});
+  }
+
   return (
     <Modal
       isOpen={isOpen}
       contentLabel="Add animal"
       style={customStyles}
     >
-      <h2>Add animal</h2>
+      <h2>{isNewAnimal ? "Add" : "Edit"} animal</h2>
       <form className="form-container" onSubmit={onSubmit} method="post">
         <div className="add-animal-form-input">
           <label htmlFor="name">Name:</label>
@@ -78,7 +83,7 @@ const AnimalFormModal = ({ isOpen, currentAnimal, setCurrentAnimal, setIsModalOp
         </div>
         <div className="form-btns">
           <button type="submit" className="add-btn">Save</button>
-          <button type="button" onClick={() => setIsModalOpen(false)} className="cancel-btn">Cancel</button>
+          <button type="button" onClick={onCancel} className="cancel-btn">Cancel</button>
         </div>
       </form>
     </Modal>
