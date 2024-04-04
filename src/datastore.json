@@ -1,81 +1,96 @@
 [
   {
+    "id": 1,
     "name": "Lion",
     "description": "The lion is a majestic big cat known for its strength and courage."
   },
   {
+    "id": 2,
     "name": "Elephant",
     "description": "The elephant is a massive, herbivorous mammal with a long trunk and large ears."
   },
   {
+    "id": 3,
     "name": "Giraffe",
     "description": "The giraffe is a tall, long-necked animal known for its distinctive spotted coat."
   },
   {
+    "id": 4,
     "name": "Tiger",
     "description": "The tiger is a powerful and solitary big cat known for its striking orange coat with black stripes."
   },
   {
+    "id": 5,
     "name": "Penguin",
     "description": "The penguin is a flightless bird known for its waddling walk and black-and-white plumage."
   },
   {
+    "id": 6,
     "name": "Dolphin",
     "description": "The dolphin is a highly intelligent marine mammal known for its playful behavior."
   },
   {
+    "id": 7,
     "name": "Kangaroo",
     "description": "The kangaroo is a marsupial with powerful hind legs used for hopping and carrying young in a pouch."
   },
   {
+    "id": 8,
     "name": "Cheetah",
     "description": "The cheetah is the fastest land animal, capable of reaching speeds up to 60-70 miles per hour."
   },
   {
+    "id": 9,
     "name": "Hippopotamus",
     "description": "The hippopotamus is a large, aquatic mammal with a massive body and large jaws."
   },
   {
+    "id": 10,
     "name": "Gorilla",
     "description": "The gorilla is the largest primate and is known for its immense strength and gentle nature."
   },
   {
+    "id": 11,
     "name": "zebra 2",
     "description": "stripes stripes"
   },
   {
-    "name": "",
-    "description": ""
-  },
-  {
+    "id": 13,
     "name": "sdfjsgfjskgdfjks",
     "description": "sdgfhdsjigfdahogjhsidog"
   },
   {
+    "id": 14,
     "name": "ddfsg",
     "description": "fdsgdgdfgd"
   },
   {
+    "id": 15,
     "name": "dolphine",
     "description": "hsbdfhjfsdfbsdhj"
   },
   {
+    "id": 16,
     "name": "dolphine",
     "description": "sjdbsjfbsjdfbjsdfbjsdfbjdsfbsjkfbjksdbfjksbfksjdbfkjsdf"
   },
   {
+    "id": 17,
     "name": "jsfdsjdfsjdfhdsjhf",
     "description": "sdfdsfsfsifjsdklvhjdkhvdkhvdkhvdkv"
   },
   {
+    "id": 18,
     "name": "xjkfskdfhsdk",
     "description": "sfdsfsfsdfsdfdsf"
   },
   {
+    "id": 19,
     "name": "test anuma",
     "description": "dsmfbsdjf"
   },
   {
+    "id": 20,
     "name": "mark ",
     "description": "sdjfbsjfsjk"
   }
