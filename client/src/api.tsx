@@ -16,8 +16,8 @@ export const postAnimal = async (animal: Animal) : Promise<Animal> =>{
   }
 }
 
-export const getAnimals = async () : Promise<Animal[]> => {
-  const response = await fetch('/animals');
+export const getAnimals = async (page: number, limit: number) : Promise<Animal[]> => {
+  const response = await fetch(`/animals?page=${page}&limit=${limit}`);
   const data = await response.json();
   return (data as any).animals
 }
@@ -50,16 +50,4 @@ export const putAnimal =  async (animal: Animal) : Promise<Animal> => {
     throw new Error(e.message);
   }
 }
-
-
-
-// export const postAnimalById =  async (id: number) : Promise<void> => {
-//   const response = await fetch(`/animals/${id}`, {
-//     method: 'PUT',
-//   });
-//   if (!response.ok) {
-//     const data = await response.json();
-//     throw new Error(data.message);
-//   }
-// }
 

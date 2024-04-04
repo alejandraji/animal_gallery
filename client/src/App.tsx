@@ -16,23 +16,29 @@ const  App = () => {
     removeAnimal,
     addAnimal,
     isLoading,
-    replaceAnimal
+    replaceAnimal,
+    incrementPage,
+    decrementPage
   } = useAnimals();
 
   const renderAnimalCards = () => animals.length > 0 ? (
-    <ul className="animal-list-container">
-      {animals.map(animal =>
-        <AnimalCard
-          key={animal.id}
-          animal={animal}
-          removeAnimal={removeAnimal}
-          setIsModalOpen={setIsModalOpen}
-          setCurrentAnimal={setCurrentAnimal}
-          setSuccessMessage={setSuccessMessage}
-          setErrorMessage={setErrorMessage}
-        />
-      )}
-    </ul>
+    <>
+      <ul className="animal-list-container">
+        {animals.map(animal =>
+          <AnimalCard
+            key={animal.id}
+            animal={animal}
+            removeAnimal={removeAnimal}
+            setIsModalOpen={setIsModalOpen}
+            setCurrentAnimal={setCurrentAnimal}
+            setSuccessMessage={setSuccessMessage}
+            setErrorMessage={setErrorMessage}
+          />
+        )}
+      </ul>
+      <button onClick={decrementPage}>Prev</button>
+      <button onClick={incrementPage}>Next</button>
+    </>
   ) : (
     <p>No animals. Try adding one.</p>
   );

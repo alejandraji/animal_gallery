@@ -68,6 +68,13 @@ class Datastore {
     return newAnimal;
   }
 
+  async getAnimalsPage(page, limit) {
+    const end = limit * page;
+    const start = end - limit;
+    const animals = await this.getAllAnimals();
+    return animals.slice(start, end);
+  }
+
   /** Fetches aninamls from datastore file */
   async getAllAnimals() {
     const jsonRecords = await

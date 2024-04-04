@@ -11,8 +11,17 @@ console.log("datastore", datastore)
 
 /** Endpoint to fetch all animals from the datastore */
 app.get('/animals', async (req, res) => {
-  const animalList = await datastore.getAllAnimals();
-  res.json({ animals: animalList });
+  let page = req.query.page;
+  let limit = req.query.limit;
+
+  const animalList = await datastore.getAnimalsPage(page, limit);
+  res.json({
+    animals: animalList,
+    pagination: {
+      number: page,
+      limit: limit
+    }
+  });
 });
 
 /** Endpoint to add a new animal to the datastore */
